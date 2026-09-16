@@ -11,15 +11,15 @@ if response.status_code == 200:
     print("Connection successful! Processing data...")
     raw_data = response.json()
     
-    # --- NEW: Pandas Integration ---
+    #  Pandas Integration
     
-    # 1. Convert the JSON list directly into a Pandas table (DataFrame)
+    #  Convert  JSON list directly into a Pandas table 
     data = pd.DataFrame(raw_data)
     
-    # 2. Count the crime categories (We use 'category' because that is the key in the JSON)
+    #  Count the crime categories ( 'category' is the key in the JSON)
     crime_counts = data['category'].value_counts()
     
-    # 3. Print the top 5 crimes
+    # Print top 5 crimes
     print("\nTop 5 Crimes in Central London this month:")
     print(crime_counts.head(5))
     
