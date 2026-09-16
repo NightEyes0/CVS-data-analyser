@@ -13,7 +13,7 @@ The script automatically downloads thousands of recent crime reports, calculates
 * Matplotlib (Data visualization)
 
 # Visual Output
-Here is the automated chart generated from live UK Police data:
+Here is the automated chart generated from live UK Police data(FROM 16/09/26):
 
 ![Live Crime Chart](live_crime_chart.png)
 
