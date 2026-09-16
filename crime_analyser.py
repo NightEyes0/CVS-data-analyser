@@ -1,0 +1,1 @@
+print("Crime Data Analyser initialized!")
