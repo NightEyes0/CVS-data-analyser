@@ -1,4 +1,4 @@
-# CSV Data Analyser 📊
+# CSV Data Analyser 
 
 A Python-based data analysis tool that processes, cleans, and visualizes local crime data.
 
