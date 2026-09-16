@@ -2,24 +2,37 @@ import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# We are using the GPS coordinates for Central London
 url = "https://data.police.uk/api/crimes-street/all-crime?lat=51.5074&lng=-0.1278"
 
 print("Connecting to the UK Police API...")
 response = requests.get(url)
 
-# A status code of 200 means "OK / Successful" in web development
 if response.status_code == 200:
-    print("Connection successful! Downloading live data...")
-    
-    # The API sends data back in JSON format, which Python converts to a list
+    print("Connection successful! Processing data...")
     raw_data = response.json()
     
-    print(f"Downloaded {len(raw_data)} recent crime reports!")
+    # --- NEW: Pandas Integration ---
     
-    # Let's print out just the very first crime report to see what the database gave us
-    print("\nSample of the first crime report:")
-    print(raw_data[0])
+    # 1. Convert the JSON list directly into a Pandas table (DataFrame)
+    data = pd.DataFrame(raw_data)
     
+    # 2. Count the crime categories (We use 'category' because that is the key in the JSON)
+    crime_counts = data['category'].value_counts()
+    
+    # 3. Print the top 5 crimes
+    print("\nTop 5 Crimes in Central London this month:")
+    print(crime_counts.head(5))
+    
+    # 4. Generate the Chart
+    print("\nGenerating live data chart...")
+    crime_counts.plot(kind='bar', color='coral')
+    plt.title("Central London Crime Reports (Live API)")
+    plt.xlabel("Crime Category")
+    plt.ylabel("Number of Reports")
+    plt.tight_layout()
+    plt.savefig("live_crime_chart.png")
+    
+    print("Chart saved as 'live_crime_chart.png'!")
+
 else:
-    print(f"Failed to connect. Error code: {response.status_code}")
+    print("Failed to connect to the API.")
